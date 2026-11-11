@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.cluster import KMeans
+from time import time
 
 # Exercise one
 
@@ -25,3 +26,17 @@ def kmeans_diamonds(n, k):
     X = diamonds_numeric.iloc[:n].to_numpy()
 
     return kmeans(X, k)
+
+
+def kmeans_timer(n, k, n_iter=5):
+    times = []
+
+    for i in range(n_iter):
+        start = time()
+
+        kmeans_diamonds(n, k)
+
+        t = time() - start
+        times.append(t)
+
+    return np.mean(times)
